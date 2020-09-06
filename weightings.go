@@ -104,7 +104,7 @@ func (t TfidfTransformer) Save(w io.Writer) error {
 // useful for loading a previously trained and saved model from another context
 // (e.g. offline training) for use within another context (e.g. production) for
 // reproducible results.  Load should only be performed with trusted data.
-func (t *TfidfTransformer) Load(r io.Reader) error {
+func (t *TfidfTransformer) Load(r io.Reader) (mat.Matrix, error) {
 	var model sparse.DIA
 
 	if _, err := model.UnmarshalBinaryFrom(r); err != nil {
@@ -112,5 +112,5 @@ func (t *TfidfTransformer) Load(r io.Reader) error {
 	}
 	t.transform = &model
 
-	return nil
+	return t.transform, nil
 }
