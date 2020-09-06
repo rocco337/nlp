@@ -112,5 +112,5 @@ func (t *TfidfTransformer) Load(r io.Reader) (mat.Matrix, error) {
 	}
 	t.transform = &model
 
-	return model, nil
+	return t.transform, nil
 }
